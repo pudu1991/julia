@@ -196,3 +196,8 @@ end
 let a = broadcast(Float32, [3, 4, 5])
     @test eltype(a) == Float32
 end
+
+# PR 16988
+@test Base.promote_op(+, Bool) === Int
+@test isa(broadcast(+, true), Array{Int,0})
+@test Base.promote_op(Float64, Bool) === Float64
